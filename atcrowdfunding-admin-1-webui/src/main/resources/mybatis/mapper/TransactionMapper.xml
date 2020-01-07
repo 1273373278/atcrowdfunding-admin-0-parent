@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.atguigu.crowd.funding.mapper.TransactionMapper" >
+  <resultMap id="BaseResultMap" type="com.atguigu.crowd.funding.entity.Transaction" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_sn" property="orderSn" jdbcType="VARCHAR" />
+    <result column="pay_sn" property="paySn" jdbcType="VARCHAR" />
+    <result column="member_id" property="memberId" jdbcType="INTEGER" />
+    <result column="amount" property="amount" jdbcType="DECIMAL" />
+    <result column="pay_state" property="payState" jdbcType="TINYINT" />
+    <result column="source" property="source" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="completion_time" property="completionTime" jdbcType="TIMESTAMP" />
+    <result column="note" property="note" jdbcType="VARCHAR" />
+    <result column="create_at" property="createAt" jdbcType="TIMESTAMP" />
+    <result column="update_at" property="updateAt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_sn, pay_sn, member_id, amount, pay_state, source, status, completion_time, 
+    note, create_at, update_at
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.atguigu.crowd.funding.entity.TransactionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from t_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_transaction
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_transaction
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.atguigu.crowd.funding.entity.TransactionExample" >
+    delete from t_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.atguigu.crowd.funding.entity.Transaction" >
+    insert into t_transaction (id, order_sn, pay_sn, 
+      member_id, amount, pay_state, 
+      source, status, completion_time, 
+      note, create_at, update_at
+      )
+    values (#{id,jdbcType=INTEGER}, #{orderSn,jdbcType=VARCHAR}, #{paySn,jdbcType=VARCHAR}, 
+      #{memberId,jdbcType=INTEGER}, #{amount,jdbcType=DECIMAL}, #{payState,jdbcType=TINYINT}, 
+      #{source,jdbcType=VARCHAR}, #{status,jdbcType=TINYINT}, #{completionTime,jdbcType=TIMESTAMP}, 
+      #{note,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.atguigu.crowd.funding.entity.Transaction" >
+    insert into t_transaction
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderSn != null" >
+        order_sn,
+      </if>
+      <if test="paySn != null" >
+        pay_sn,
+      </if>
+      <if test="memberId != null" >
+        member_id,
+      </if>
+      <if test="amount != null" >
+        amount,
+      </if>
+      <if test="payState != null" >
+        pay_state,
+      </if>
+      <if test="source != null" >
+        source,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="completionTime != null" >
+        completion_time,
+      </if>
+      <if test="note != null" >
+        note,
+      </if>
+      <if test="createAt != null" >
+        create_at,
+      </if>
+      <if test="updateAt != null" >
+        update_at,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderSn != null" >
+        #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="paySn != null" >
+        #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payState != null" >
+        #{payState,jdbcType=TINYINT},
+      </if>
+      <if test="source != null" >
+        #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="completionTime != null" >
+        #{completionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.atguigu.crowd.funding.entity.TransactionExample" resultType="java.lang.Integer" >
+    select count(*) from t_transaction
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update t_transaction
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderSn != null" >
+        order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.paySn != null" >
+        pay_sn = #{record.paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.memberId != null" >
+        member_id = #{record.memberId,jdbcType=INTEGER},
+      </if>
+      <if test="record.amount != null" >
+        amount = #{record.amount,jdbcType=DECIMAL},
+      </if>
+      <if test="record.payState != null" >
+        pay_state = #{record.payState,jdbcType=TINYINT},
+      </if>
+      <if test="record.source != null" >
+        source = #{record.source,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        status = #{record.status,jdbcType=TINYINT},
+      </if>
+      <if test="record.completionTime != null" >
+        completion_time = #{record.completionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.note != null" >
+        note = #{record.note,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createAt != null" >
+        create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.updateAt != null" >
+        update_at = #{record.updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update t_transaction
+    set id = #{record.id,jdbcType=INTEGER},
+      order_sn = #{record.orderSn,jdbcType=VARCHAR},
+      pay_sn = #{record.paySn,jdbcType=VARCHAR},
+      member_id = #{record.memberId,jdbcType=INTEGER},
+      amount = #{record.amount,jdbcType=DECIMAL},
+      pay_state = #{record.payState,jdbcType=TINYINT},
+      source = #{record.source,jdbcType=VARCHAR},
+      status = #{record.status,jdbcType=TINYINT},
+      completion_time = #{record.completionTime,jdbcType=TIMESTAMP},
+      note = #{record.note,jdbcType=VARCHAR},
+      create_at = #{record.createAt,jdbcType=TIMESTAMP},
+      update_at = #{record.updateAt,jdbcType=TIMESTAMP}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.atguigu.crowd.funding.entity.Transaction" >
+    update t_transaction
+    <set >
+      <if test="orderSn != null" >
+        order_sn = #{orderSn,jdbcType=VARCHAR},
+      </if>
+      <if test="paySn != null" >
+        pay_sn = #{paySn,jdbcType=VARCHAR},
+      </if>
+      <if test="memberId != null" >
+        member_id = #{memberId,jdbcType=INTEGER},
+      </if>
+      <if test="amount != null" >
+        amount = #{amount,jdbcType=DECIMAL},
+      </if>
+      <if test="payState != null" >
+        pay_state = #{payState,jdbcType=TINYINT},
+      </if>
+      <if test="source != null" >
+        source = #{source,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="completionTime != null" >
+        completion_time = #{completionTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="note != null" >
+        note = #{note,jdbcType=VARCHAR},
+      </if>
+      <if test="createAt != null" >
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateAt != null" >
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.atguigu.crowd.funding.entity.Transaction" >
+    update t_transaction
+    set order_sn = #{orderSn,jdbcType=VARCHAR},
+      pay_sn = #{paySn,jdbcType=VARCHAR},
+      member_id = #{memberId,jdbcType=INTEGER},
+      amount = #{amount,jdbcType=DECIMAL},
+      pay_state = #{payState,jdbcType=TINYINT},
+      source = #{source,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      completion_time = #{completionTime,jdbcType=TIMESTAMP},
+      note = #{note,jdbcType=VARCHAR},
+      create_at = #{createAt,jdbcType=TIMESTAMP},
+      update_at = #{updateAt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
