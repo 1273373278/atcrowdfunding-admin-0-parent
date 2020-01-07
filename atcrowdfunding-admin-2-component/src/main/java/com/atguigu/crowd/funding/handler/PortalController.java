@@ -15,4 +15,5 @@ public class PortalController {
     public String shuoIndex(){
         return "index-page";
     }
+
 }

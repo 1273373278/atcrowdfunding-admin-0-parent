@@ -5,6 +5,8 @@ import com.atguigu.crowd.funding.entity.AdminExample;
 import com.atguigu.crowd.funding.mapper.AdminMapper;
 import com.atguigu.crowd.funding.service.api.AdminService;
 import com.atguigu.crowd.funding.util.CrowdFundingUtils;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -64,5 +66,17 @@ public class AdminServiceImpl implements AdminService{
         }
 
         return null;
+    }
+
+    @Override
+    public PageInfo<Admin> queryForKeywordSearch(Integer pageNum, Integer pageSize, String keyword) {
+        // 1.调用PageHelper的工具方法，开启分页功能
+        PageHelper.startPage(pageNum, pageSize);
+
+        // 2.执行分页查询
+        List<Admin> list = adminMapper.selectAdminListByKeyword(keyword);
+
+        // 3.将list封装到PageInfo对象中
+        return new PageInfo<>(list);
     }
 }

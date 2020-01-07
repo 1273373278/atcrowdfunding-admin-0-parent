@@ -18,5 +18,24 @@
 		<property name="prefix" value="/WEB-INF/"/>
 		<property name="suffix" value=".jsp"/>
 	</bean>
+
+	<!-- 配置拦截器 -->
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<!-- 设置当前拦截器要拦截的路径 -->
+			<mvc:mapping path="/**"/>
+
+			<!-- 设置要拦截的路径中的例外，也就是不拦截的路径 -->
+			<mvc:exclude-mapping path="/admin/login.html"/>
+			<mvc:exclude-mapping path="/admin/doLogin.html"/>
+			<mvc:exclude-mapping path="/admin/logout.html"/>
+			<mvc:exclude-mapping path="/index.html"/>
+
+			<!-- 拦截器的bean -->
+			<bean class="com.atguigu.crowd.funding.interceptor.LoginInterceptor"/>
+		</mvc:interceptor>
+	</mvc:interceptors>
+
+
 	
 </beans>
