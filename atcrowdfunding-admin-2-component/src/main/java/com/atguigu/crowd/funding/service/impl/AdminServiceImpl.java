@@ -31,7 +31,8 @@ public class AdminServiceImpl implements AdminService{
         // 根据loginAcct查询数据库
         AdminExample adminExample = new AdminExample();
 
-        adminExample.createCriteria().andLoginAcctEqualTo(loginAcct);
+        //adminExample.createCriteria().andLoginAcctEqualTo(loginAcct);
+        adminExample.createCriteria().andLoginacctEqualTo(loginAcct);
 
         // 执行查询
         List<Admin> list = adminMapper.selectByExample(adminExample);
@@ -52,7 +53,7 @@ public class AdminServiceImpl implements AdminService{
         }
 
         // 比较密码
-        String userPswdDataBase = admin.getUserPswd();
+        String userPswdDataBase = admin.getUserpswd();
 
         String userPswdBroswer = CrowdFundingUtils.md5(userPswd);
 

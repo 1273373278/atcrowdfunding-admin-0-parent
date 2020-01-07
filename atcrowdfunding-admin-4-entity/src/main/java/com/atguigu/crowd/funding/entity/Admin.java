@@ -3,37 +3,17 @@ package com.atguigu.crowd.funding.entity;
 public class Admin {
     private Integer id;
 
-    private String loginAcct;
+    private String loginacct;
 
-    private String userPswd;
+    private String userpswd;
 
-    private String userName;
+    private String username;
 
     private String email;
 
-    private String createTime;
-    
-    public Admin() {
-		// TODO Auto-generated constructor stub
-	}
+    private String createtime;
 
-    public Admin(Integer id, String loginAcct, String userPswd, String userName, String email, String createTime) {
-		super();
-		this.id = id;
-		this.loginAcct = loginAcct;
-		this.userPswd = userPswd;
-		this.userName = userName;
-		this.email = email;
-		this.createTime = createTime;
-	}
-
-	@Override
-	public String toString() {
-		return "Admin [id=" + id + ", loginAcct=" + loginAcct + ", userPswd=" + userPswd + ", userName=" + userName
-				+ ", email=" + email + ", createTime=" + createTime + "]";
-	}
-
-	public Integer getId() {
+    public Integer getId() {
         return id;
     }
 
@@ -41,28 +21,28 @@ public class Admin {
         this.id = id;
     }
 
-    public String getLoginAcct() {
-        return loginAcct;
+    public String getLoginacct() {
+        return loginacct;
     }
 
-    public void setLoginAcct(String loginAcct) {
-        this.loginAcct = loginAcct == null ? null : loginAcct.trim();
+    public void setLoginacct(String loginacct) {
+        this.loginacct = loginacct == null ? null : loginacct.trim();
     }
 
-    public String getUserPswd() {
-        return userPswd;
+    public String getUserpswd() {
+        return userpswd;
     }
 
-    public void setUserPswd(String userPswd) {
-        this.userPswd = userPswd == null ? null : userPswd.trim();
+    public void setUserpswd(String userpswd) {
+        this.userpswd = userpswd == null ? null : userpswd.trim();
     }
 
-    public String getUserName() {
-        return userName;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName == null ? null : userName.trim();
+    public void setUsername(String username) {
+        this.username = username == null ? null : username.trim();
     }
 
     public String getEmail() {
@@ -73,11 +53,23 @@ public class Admin {
         this.email = email == null ? null : email.trim();
     }
 
-    public String getCreateTime() {
-        return createTime;
+    public String getCreatetime() {
+        return createtime;
     }
 
-    public void setCreateTime(String createTime) {
-        this.createTime = createTime == null ? null : createTime.trim();
+    public void setCreatetime(String createtime) {
+        this.createtime = createtime == null ? null : createtime.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "Admin{" +
+                "id=" + id +
+                ", loginacct='" + loginacct + '\'' +
+                ", userpswd='" + userpswd + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", createtime='" + createtime + '\'' +
+                '}';
     }
 }
